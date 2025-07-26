@@ -16,10 +16,17 @@ export const useGlobalState=()=>{
 
 export const GlobalProvider = ({ children }) => {
     const[state,dispatch]=useReducer(AppReducer,initialState)
+    
     const addTransaction=(transaction)=>{
         dispatch({
             type:"ADD_TRANSACTION",
             payload: transaction
+        })
+    }
+    const deleteTransaction=(id)=>{
+        dispatch({
+            type:"DELETE_TRANSACTION",
+            payload: id
         })
     }
     return (
@@ -27,6 +34,7 @@ export const GlobalProvider = ({ children }) => {
         value={{
              transactions:state.transactions, 
              addTransaction,
+             deleteTransaction
              }}>
             {children}
         </Context.Provider>
